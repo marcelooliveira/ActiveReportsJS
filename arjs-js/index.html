@@ -14,7 +14,11 @@
     <script>
         function load() {
             const viewer = new ActiveReports.Viewer('#ARJSviewerDiv');
-            const parameters = [{ Name: 'Orders', Value: ['orders.json'] }];
+            const parameters = [
+                { Name: 'Orders', Value: ['orders.json'] },
+                { Name: 'Products', Value: ['products.json'] },
+                { Name: 'Customers', Value: ['customers.json'] }
+            ];
             viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
         }
     </script>
