@@ -15,19 +15,61 @@
     <script>
         function load() {
             const viewer = new ActiveReports.Viewer('#ARJSviewerDiv');
-            const parameters = [
-                { Name: 'Orders', Value: ['orders.json'] }
-            ];
+            const parameters = [];
+            const customers = [];
+            const products = [];
+            const orders = [];
+            const orderDetails = [];
 
             $.get("https://demodata.grapecity.com/northwind/api/v1/Customers", function (data) {
-                parameters.push({ Name: 'Customers', Value: [JSON.stringify(data)] });
+                customers.push(data);
+                parameters.push({ Name: 'Customers', Value: [JSON.stringify(customers)] });
             })
-            .done(function() {
-                $.get("https://demodata.grapecity.com/northwind/api/v1/Products", function (data) {
-                    parameters.push({ Name: 'Products', Value: [JSON.stringify(data)] });
-                    viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
-                })
-            });
+                .done(function () {
+                    $.get("https://demodata.grapecity.com/northwind/api/v1/Products", function (data) {
+                        products.push(data);
+                        parameters.push({ Name: 'Products', Value: [JSON.stringify(products)] });
+                    }).done(function () {
+                        $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
+                            orders.push(data);
+                            var requests = [];
+                            for (var i = 0; i < 5; i++) {
+                                requests.push($.ajax({ url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + data[i].orderId + "/OrderDetails" }));
+                            }
+
+                            $.when.apply(undefined, requests).then(function () {
+                                var objects = arguments;
+                                var orderGroups = objects;
+                                for (var i = 0; i < orderGroups.length; i++) {
+                                    for (var j = 0; j < orderGroups[i][0].length; j++) {
+                                        var orderDetail = orderGroups[i][0][j];
+
+                                        const order = orders[0].find(element => element.orderId == orderDetail.orderId);
+                                        orderDetail.orderId = order.orderId;
+                                        orderDetail.customerId = order.customerId;
+                                        orderDetail.employeeId = order.employeeId;
+                                        orderDetail.orderDate = order.orderDate;
+                                        orderDetail.requiredDate = order.requiredDate;
+                                        orderDetail.shippedDate = order.shippedDate;
+                                        orderDetail.shipVia = order.shipVia;
+                                        orderDetail.freight = order.freight;
+                                        orderDetail.shipName = order.shipName;
+                                        orderDetail.shipAddress = order.shipAddress;
+                                        orderDetail.shipCity = order.shipCity;
+                                        orderDetail.shipRegion = order.shipRegion;
+                                        orderDetail.shipPostalCode = order.shipPostalCode;
+                                        orderDetail.shipCountry = order.shipCountry;
+
+                                        orderDetails.push(orderDetail);
+                                    }
+                                }
+
+                                parameters.push({ Name: 'Orders', Value: [JSON.stringify(orderDetails)] });
+                                viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
+                            });
+                        })
+                    });
+                });
         }
     </script>
 </body>
