@@ -15,23 +15,23 @@
     <script>
         function load() {
             const viewer = new ActiveReports.Viewer('#ARJSviewerDiv');
-            const parameters = [];
-            const customers = [];
-            const products = [];
-            const orders = [];
-            const orderDetails = [];
+            var parameters = [];
+            var customers = [];
+            var products = [];
+            var orders = [];
+            var orderDetails = [];
 
             $.get("https://demodata.grapecity.com/northwind/api/v1/Customers", function (data) {
-                customers.push(data);
+                customers = customers.concat(data);
                 parameters.push({ Name: 'Customers', Value: [JSON.stringify(customers)] });
             })
                 .done(function () {
                     $.get("https://demodata.grapecity.com/northwind/api/v1/Products", function (data) {
-                        products.push(data);
+                        products = products.concat(data);
                         parameters.push({ Name: 'Products', Value: [JSON.stringify(products)] });
                     }).done(function () {
                         $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
-                            orders.push(data);
+                            orders = orders.concat(data);
                             var requests = [];
                             for (var i = 0; i < 5; i++) {
                                 requests.push($.ajax({ url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + data[i].orderId + "/OrderDetails" }));
@@ -44,7 +44,7 @@
                                     for (var j = 0; j < orderGroups[i][0].length; j++) {
                                         var orderDetail = orderGroups[i][0][j];
 
-                                        const order = orders[0].find(element => element.orderId == orderDetail.orderId);
+                                        const order = orders.find(element => element.orderId == orderDetail.orderId);
                                         orderDetail.orderId = order.orderId;
                                         orderDetail.customerId = order.customerId;
                                         orderDetail.employeeId = order.employeeId;
