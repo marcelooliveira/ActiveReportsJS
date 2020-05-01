@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ActiveReportsJS Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="node_modules/@grapecity/activereports/styles/ar-js-viewer.css" />
+    <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ie-polyfills.js"></script> <!--to run in IE-->
+    <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-core.js"></script>
+    <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-viewer.js"></script>
+</head>
+<body onload="load()">
+    <div id="ARJSviewerDiv" style="height: 600px"></div>
+    <script>
+        function load() {
+            const viewer = new ActiveReports.Viewer('#ARJSviewerDiv');
+            const parameters = [{ Name: 'Orders', Value: ['orders.json'] }];
+            viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
+        }
+    </script>
+</body>
+</html>
