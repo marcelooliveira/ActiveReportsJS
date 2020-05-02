@@ -33,7 +33,8 @@
                         $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
                             orders = orders.concat(data);
                             var requests = [];
-                            for (var i = 0; i < 20; i++) {
+                            //for (var i = 0; i < orders.length; i++) {
+                            for (var i = 0; i < 50; i++) {
                                 requests.push($.ajax({ url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + data[i].orderId + "/OrderDetails" }));
                             }
 
