@@ -72,6 +72,7 @@
                                 paramOrders.Value = [JSON.stringify(orderDetails)];
                                 parameters.push(paramOrders);
                                 viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
+                                $('#flex-container').hide();
                             }
 
                             function addOrderDetails(o) {
@@ -102,7 +103,8 @@
                                                 orderDetails.push(orderDetail);
                                             }
 
-                                            $('#flex-item').html(parseInt(100 * (orderProcessed++ / orders.length)) + '%');
+                                            $('#flex-item').html(
+                                                'Processing order details...' + parseInt(100 * (orderProcessed++ / orders.length)) + '%');
 
                                             resolve(data);
                                         })
@@ -116,7 +118,7 @@
                                 }, Promise.resolve())
                             }
 
-                            reductiveDownloadChain(orders.slice(0, 120))
+                            reductiveDownloadChain(orders)
                                 .then(_ => console.log('All order details loaded successfully.'))
                                 .then(_ => {
                                     showReport();
