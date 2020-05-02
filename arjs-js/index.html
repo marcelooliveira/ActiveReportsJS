@@ -34,40 +34,90 @@
                             orders = orders.concat(data);
                             var requests = [];
                             //for (var i = 0; i < orders.length; i++) {
-                            for (var i = 0; i < 50; i++) {
-                                requests.push($.ajax({ url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + data[i].orderId + "/OrderDetails" }));
+                            //for (var i = 0; i < 80; i++) {
+                            //    requests.push($.ajax({ url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + data[i].orderId + "/OrderDetails" }));
+                            //}
+
+                            //$.when.apply(undefined, requests).then(function () {
+                            //    var objects = arguments;
+                            //    var orderGroups = objects;
+                            //    for (var i = 0; i < orderGroups.length; i++) {
+                            //        for (var j = 0; j < orderGroups[i][0].length; j++) {
+                            //            var orderDetail = orderGroups[i][0][j];
+
+                            //            const order = orders.find(element => element.orderId == orderDetail.orderId);
+                            //            orderDetail.orderId = order.orderId;
+                            //            orderDetail.customerId = order.customerId;
+                            //            orderDetail.employeeId = order.employeeId;
+                            //            orderDetail.orderDate = order.orderDate;
+                            //            orderDetail.requiredDate = order.requiredDate;
+                            //            orderDetail.shippedDate = order.shippedDate;
+                            //            orderDetail.shipVia = order.shipVia;
+                            //            orderDetail.freight = order.freight;
+                            //            orderDetail.shipName = order.shipName;
+                            //            orderDetail.shipAddress = order.shipAddress;
+                            //            orderDetail.shipCity = order.shipCity;
+                            //            orderDetail.shipRegion = order.shipRegion;
+                            //            orderDetail.shipPostalCode = order.shipPostalCode;
+                            //            orderDetail.shipCountry = order.shipCountry;
+
+                            //            orderDetails.push(orderDetail);
+                            //        }
+                            //    }
+
+                            //    var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
+                            //    parameters.push(paramOrders);
+                            //    viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
+                            //    paramOrders.Value = [JSON.stringify(orderDetails)];
+                            //});
+
+                            function addOrderDetails(o) {
+                                return new Promise((resolve, reject) => {
+                                    $.ajax({
+                                        url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + o.orderId + "/OrderDetails" })
+                                        .done(function (data) {
+                                            for (var j = 0; j < data.length; j++) {
+                                                var orderDetail = data[j];
+
+                                                const order = orders.find(element => element.orderId == orderDetail.orderId);
+                                                orderDetail.orderId = order.orderId;
+                                                orderDetail.customerId = order.customerId;
+                                                orderDetail.employeeId = order.employeeId;
+                                                orderDetail.orderDate = order.orderDate;
+                                                orderDetail.requiredDate = order.requiredDate;
+                                                orderDetail.shippedDate = order.shippedDate;
+                                                orderDetail.shipVia = order.shipVia;
+                                                orderDetail.freight = order.freight;
+                                                orderDetail.shipName = order.shipName;
+                                                orderDetail.shipAddress = order.shipAddress;
+                                                orderDetail.shipCity = order.shipCity;
+                                                orderDetail.shipRegion = order.shipRegion;
+                                                orderDetail.shipPostalCode = order.shipPostalCode;
+                                                orderDetail.shipCountry = order.shipCountry;
+
+                                                orderDetails.push(orderDetail);
+                                            }
+                                            resolve(data);
+                                        })
+                                });
                             }
 
-                            $.when.apply(undefined, requests).then(function () {
-                                var objects = arguments;
-                                var orderGroups = objects;
-                                for (var i = 0; i < orderGroups.length; i++) {
-                                    for (var j = 0; j < orderGroups[i][0].length; j++) {
-                                        var orderDetail = orderGroups[i][0][j];
+                            function reductiveDownloadChain(ords) {
+                                return ords.reduce((chain, currentOrder) => {
+                                    return chain
+                                        .then(_ => addOrderDetails(currentOrder));
+                                }, Promise.resolve())
+                            }
 
-                                        const order = orders.find(element => element.orderId == orderDetail.orderId);
-                                        orderDetail.orderId = order.orderId;
-                                        orderDetail.customerId = order.customerId;
-                                        orderDetail.employeeId = order.employeeId;
-                                        orderDetail.orderDate = order.orderDate;
-                                        orderDetail.requiredDate = order.requiredDate;
-                                        orderDetail.shippedDate = order.shippedDate;
-                                        orderDetail.shipVia = order.shipVia;
-                                        orderDetail.freight = order.freight;
-                                        orderDetail.shipName = order.shipName;
-                                        orderDetail.shipAddress = order.shipAddress;
-                                        orderDetail.shipCity = order.shipCity;
-                                        orderDetail.shipRegion = order.shipRegion;
-                                        orderDetail.shipPostalCode = order.shipPostalCode;
-                                        orderDetail.shipCountry = order.shipCountry;
+                            reductiveDownloadChain(orders.slice(0, 120))
+                                .then(_ => {
+                                    var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
+                                    paramOrders.Value = [JSON.stringify(orderDetails)];
+                                    parameters.push(paramOrders);
+                                    viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
+                                })
+                                .then(_ => console.log('files were downloaded in reductive chain mode'))
 
-                                        orderDetails.push(orderDetail);
-                                    }
-                                }
-
-                                parameters.push({ Name: 'Orders', Value: [JSON.stringify(orderDetails)] });
-                                viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
-                            });
                         })
                     });
                 });
