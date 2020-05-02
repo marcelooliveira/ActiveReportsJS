@@ -9,9 +9,42 @@
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-core.js"></script>
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-viewer.js"></script>
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <style type="text/css">
+        #flex-container {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -moz-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -moz-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        #flex-item {
+            border: 2px solid black;
+            padding: 5px;
+            background-color: white;
+            font: 30px helvetica;
+        }
+    </style>
 </head>
 <body onload="load()">
     <div id="ARJSviewerDiv" style="height: 600px"></div>
+    <div id="flex-container">
+        <div id="flex-item"></div>
+    </div>
     <script>
         function load() {
             const viewer = new ActiveReports.Viewer('#ARJSviewerDiv');
@@ -20,6 +53,7 @@
             var products = [];
             var orders = [];
             var orderDetails = [];
+            var orderProcessed = 0;
 
             $.get("https://demodata.grapecity.com/northwind/api/v1/Customers", function (data) {
                 customers = customers.concat(data);
@@ -32,49 +66,19 @@
                     }).done(function () {
                         $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
                             orders = orders.concat(data);
-                            var requests = [];
-                            //for (var i = 0; i < orders.length; i++) {
-                            //for (var i = 0; i < 80; i++) {
-                            //    requests.push($.ajax({ url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + data[i].orderId + "/OrderDetails" }));
-                            //}
 
-                            //$.when.apply(undefined, requests).then(function () {
-                            //    var objects = arguments;
-                            //    var orderGroups = objects;
-                            //    for (var i = 0; i < orderGroups.length; i++) {
-                            //        for (var j = 0; j < orderGroups[i][0].length; j++) {
-                            //            var orderDetail = orderGroups[i][0][j];
-
-                            //            const order = orders.find(element => element.orderId == orderDetail.orderId);
-                            //            orderDetail.orderId = order.orderId;
-                            //            orderDetail.customerId = order.customerId;
-                            //            orderDetail.employeeId = order.employeeId;
-                            //            orderDetail.orderDate = order.orderDate;
-                            //            orderDetail.requiredDate = order.requiredDate;
-                            //            orderDetail.shippedDate = order.shippedDate;
-                            //            orderDetail.shipVia = order.shipVia;
-                            //            orderDetail.freight = order.freight;
-                            //            orderDetail.shipName = order.shipName;
-                            //            orderDetail.shipAddress = order.shipAddress;
-                            //            orderDetail.shipCity = order.shipCity;
-                            //            orderDetail.shipRegion = order.shipRegion;
-                            //            orderDetail.shipPostalCode = order.shipPostalCode;
-                            //            orderDetail.shipCountry = order.shipCountry;
-
-                            //            orderDetails.push(orderDetail);
-                            //        }
-                            //    }
-
-                            //    var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
-                            //    parameters.push(paramOrders);
-                            //    viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
-                            //    paramOrders.Value = [JSON.stringify(orderDetails)];
-                            //});
+                            function showReport() {
+                                var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
+                                paramOrders.Value = [JSON.stringify(orderDetails)];
+                                parameters.push(paramOrders);
+                                viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
+                            }
 
                             function addOrderDetails(o) {
                                 return new Promise((resolve, reject) => {
                                     $.ajax({
-                                        url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + o.orderId + "/OrderDetails" })
+                                        url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + o.orderId + "/OrderDetails"
+                                    })
                                         .done(function (data) {
                                             for (var j = 0; j < data.length; j++) {
                                                 var orderDetail = data[j];
@@ -97,6 +101,9 @@
 
                                                 orderDetails.push(orderDetail);
                                             }
+
+                                            $('#flex-item').html(parseInt(100 * (orderProcessed++ / orders.length)) + '%');
+
                                             resolve(data);
                                         })
                                 });
@@ -110,14 +117,10 @@
                             }
 
                             reductiveDownloadChain(orders.slice(0, 120))
+                                .then(_ => console.log('All order details loaded successfully.'))
                                 .then(_ => {
-                                    var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
-                                    paramOrders.Value = [JSON.stringify(orderDetails)];
-                                    parameters.push(paramOrders);
-                                    viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
+                                    showReport();
                                 })
-                                .then(_ => console.log('files were downloaded in reductive chain mode'))
-
                         })
                     });
                 });
