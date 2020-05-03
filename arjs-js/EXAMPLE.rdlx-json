@@ -32,13 +32,13 @@
   "Body": {
     "Name": "Body",
     "Type": "section",
-    "Height": "3.2459in",
+    "Height": "10.161cm",
     "ReportItems": [
       {
         "ZIndex": 2,
         "Type": "rectangle",
         "Width": "7.65in",
-        "Height": "3.2459in",
+        "Height": "0.5139in",
         "ReportItems": [
           {
             "Type": "image",
@@ -69,310 +69,454 @@
               "PaddingBottom": "2pt"
             },
             "Name": "TextBox5"
-          },
-          {
-            "Type": "dvchart",
-            "Bar": {
-              "BottomWidth": 0.55,
-              "NeckHeight": 1,
-              "Overlap": 0,
-              "TopWidth": 0.55,
-              "Width": 0.55
-            },
-            "Footer": {
-              "Type": "dvchartfooter",
-              "Style": {
-                "PaddingTop": "2pt",
-                "PaddingBottom": "4pt",
-                "StyleName": "=\"\""
-              },
-              "TextStyle": {
-                "StyleName": "=\"\""
-              },
-              "Height": ""
-            },
-            "Header": {
-              "Type": "dvchartheader",
-              "Title": "Sales Volume by Month",
-              "Style": {
-                "PaddingTop": "4pt",
-                "PaddingBottom": "2pt",
-                "StyleName": "=\"\""
-              },
-              "TextStyle": {
-                "FontFamily": "Verdana",
-                "FontSize": "14pt",
-                "FontWeight": "Bold",
-                "StyleName": "=\"\""
-              },
-              "Height": ""
-            },
-            "Legend": {
-              "Orientation": "Vertical",
-              "Style": {
-                "PaddingRight": "10pt",
-                "PaddingTop": "4pt",
-                "PaddingBottom": "2pt",
-                "StyleName": "=\"\""
-              },
-              "TextStyle": {
-                "StyleName": "=\"\""
-              },
-              "TitleStyle": {
-                "StyleName": "=\"\""
-              },
-              "Type": "dvchartgloballegend"
-            },
-            "Palette": "Midnight",
-            "PlotArea": {
-              "Type": "dvchartplotarea",
-              "Axes": [
-                {
-                  "Type": "dvchartaxis",
-                  "LabelStyle": {
-                    "FontFamily": "Verdana",
-                    "FontSize": "9pt",
-                    "FontWeight": "Bold",
-                    "PaddingLeft": "2pt",
-                    "PaddingRight": "2pt",
-                    "PaddingTop": "2pt",
-                    "PaddingBottom": "2pt",
-                    "StyleName": "=\"\"",
-                    "Color": "#3c3c3c"
-                  },
-                  "LineStyle": {
-                    "Border": {
-                      "Style": "Solid",
-                      "Color": "#3c3c3c"
-                    },
-                    "StyleName": "=\"\""
-                  },
-                  "MajorGridStyle": {
-                    "Border": {
-                      "Style": "Solid",
-                      "Color": "Gray"
-                    },
-                    "StyleName": "=\"\""
-                  },
-                  "MajorTickStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "MinorGridStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "MinorTickStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "Plots": [
-                    "Plot 1"
-                  ],
-                  "Style": {
-                    "StyleName": "=\"\""
-                  },
-                  "TextStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "TitleStyle": {
-                    "PaddingLeft": "2pt",
-                    "PaddingRight": "2pt",
-                    "PaddingTop": "2pt",
-                    "PaddingBottom": "2pt",
-                    "StyleName": "=\"\""
-                  },
-                  "Title": "Month"
-                },
-                {
-                  "Type": "dvchartaxis",
-                  "LabelStyle": {
-                    "FontFamily": "Verdana",
-                    "FontSize": "9pt",
-                    "FontWeight": "Bold",
-                    "PaddingLeft": "2pt",
-                    "PaddingRight": "2pt",
-                    "PaddingTop": "2pt",
-                    "PaddingBottom": "2pt",
-                    "StyleName": "=\"\"",
-                    "Color": "#3c3c3c"
-                  },
-                  "LineStyle": {
-                    "Border": {
-                      "Style": "Solid",
-                      "Color": "#3c3c3c"
-                    },
-                    "StyleName": "=\"\""
-                  },
-                  "MajorGrid": true,
-                  "MajorGridStyle": {
-                    "Border": {
-                      "Style": "Dotted",
-                      "Color": "Gray"
-                    },
-                    "StyleName": "=\"\""
-                  },
-                  "MajorTickStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "MajorUnit": "20",
-                  "Max": "200",
-                  "Min": "0",
-                  "MinorGrid": true,
-                  "MinorGridStyle": {
-                    "Border": {
-                      "Style": "Solid",
-                      "Color": "LightGrey",
-                      "Width": "0.5pt"
-                    },
-                    "StyleName": "=\"\""
-                  },
-                  "MinorTickStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "Plots": [
-                    "Plot 1"
-                  ],
-                  "Style": {
-                    "StyleName": "=\"\""
-                  },
-                  "TextStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "Title": "Volume ($)",
-                  "TitleStyle": {
-                    "FontSize": "12pt",
-                    "FontWeight": "Bold",
-                    "PaddingLeft": "2pt",
-                    "PaddingRight": "2pt",
-                    "PaddingTop": "2pt",
-                    "PaddingBottom": "2pt",
-                    "StyleName": "=\"\"",
-                    "Color": "#3c3c3c"
-                  },
-                  "AxisType": "Y"
-                }
-              ],
-              "Legends": [
-                {
-                  "Type": "dvchartlegend",
-                  "Style": {
-                    "PaddingTop": "10pt",
-                    "PaddingBottom": "10pt",
-                    "StyleName": "=\"\"",
-                    "Border": {
-                      "Color": "#3c3c3c"
-                    }
-                  },
-                  "TextStyle": {
-                    "FontFamily": "Verdana",
-                    "FontSize": "8pt",
-                    "StyleName": "=\"\"",
-                    "Color": "#3c3c3c"
-                  },
-                  "TitleStyle": {
-                    "StyleName": "=\"\"",
-                    "Color": "#3c3c3c"
-                  },
-                  "Title": "Legend",
-                  "Orientation": "Vertical",
-                  "Position": "Bottom"
-                }
-              ],
-              "Style": {
-                "StyleName": "=\"\"",
-                "BackgroundColor": "#ffffff"
-              }
-            },
-            "Plots": [
-              {
-                "Type": "dvchartplot",
-                "PlotChartType": "Column",
-                "PlotChartSubtype": "Clustered",
-                "PlotName": "Plot 1",
-                "Encodings": {
-                  "Values": [
-                    {
-                      "Type": "dvchartvalueaggregateencoding",
-                      "Field": {
-                        "Value": [
-                          "=Fields!Subtotal.Value"
-                        ]
-                      },
-                      "Aggregate": "Sum"
-                    }
-                  ],
-                  "Category": {
-                    "Type": "dvchartcategoryencoding",
-                    "Field": {
-                      "Value": [
-                        "=Fields!MonthYear.Value"
-                      ]
-                    },
-                    "SortingField": "=Fields!orderDate.Value"
-                  }
-                },
-                "Config": {
-                  "LineStyle": {
-                    "Color": "Black"
-                  },
-                  "Style": {
-                    "Border": {
-                      "Style": "None",
-                      "Width": "1pt"
-                    },
-                    "StyleName": "=\"\""
-                  },
-                  "SymbolStyle": {
-                    "StyleName": "=\"\""
-                  },
-                  "Text": {
-                    "ConnectingLine": {
-                      "Border": {
-                        "Width": "1pt"
-                      },
-                      "TopBorder": {
-                        "Width": ""
-                      },
-                      "BottomBorder": {
-                        "Width": ""
-                      },
-                      "LeftBorder": {
-                        "Width": ""
-                      },
-                      "RightBorder": {
-                        "Width": ""
-                      },
-                      "StyleName": "=\"\""
-                    },
-                    "Style": {
-                      "FontFamily": "Verdana",
-                      "Color": "=Theme.Colors!Light1",
-                      "StyleName": "=\"\""
-                    },
-                    "TextPosition": "Center",
-                    "Template": "{valueField.value}"
-                  }
-                }
-              }
-            ],
-            "DataSetName": "Orders",
-            "NewSection": false,
-            "Name": "Chart1",
-            "Top": "0.5in",
-            "Width": "7.6431in",
-            "Height": "2.7459in",
-            "Style": {
-              "PaddingLeft": "2pt",
-              "PaddingRight": "2pt",
-              "PaddingTop": "2pt",
-              "PaddingBottom": "2pt",
-              "StyleName": "=\"\""
-            },
-            "KeepTogether": false
           }
         ],
         "Style": {
           "BackgroundColor": "#f1f1f1"
         },
         "Name": "Container1"
+      },
+      {
+        "Type": "dvchart",
+        "Bar": {
+          "BottomWidth": 0.55,
+          "NeckHeight": 1,
+          "Overlap": 0,
+          "TopWidth": 0.55,
+          "Width": 0.55
+        },
+        "Footer": {
+          "Type": "dvchartfooter",
+          "Style": {
+            "PaddingTop": "2pt",
+            "PaddingBottom": "4pt",
+            "StyleName": "=\"\""
+          },
+          "TextStyle": {
+            "StyleName": "=\"\""
+          },
+          "Height": ""
+        },
+        "Header": {
+          "Type": "dvchartheader",
+          "Title": "Sales Volume by Month",
+          "Style": {
+            "PaddingTop": "4pt",
+            "PaddingBottom": "2pt",
+            "StyleName": "=\"\""
+          },
+          "TextStyle": {
+            "FontFamily": "Verdana",
+            "FontSize": "14pt",
+            "FontWeight": "Bold",
+            "StyleName": "=\"\""
+          },
+          "Height": ""
+        },
+        "Legend": {
+          "Orientation": "Vertical",
+          "Style": {
+            "PaddingRight": "10pt",
+            "PaddingTop": "4pt",
+            "PaddingBottom": "2pt",
+            "StyleName": "=\"\""
+          },
+          "TextStyle": {
+            "StyleName": "=\"\""
+          },
+          "TitleStyle": {
+            "StyleName": "=\"\""
+          },
+          "Type": "dvchartgloballegend"
+        },
+        "Palette": "Midnight",
+        "PlotArea": {
+          "Type": "dvchartplotarea",
+          "Axes": [
+            {
+              "Type": "dvchartaxis",
+              "LabelStyle": {
+                "FontFamily": "Verdana",
+                "FontSize": "9pt",
+                "FontWeight": "Bold",
+                "PaddingLeft": "2pt",
+                "PaddingRight": "2pt",
+                "PaddingTop": "2pt",
+                "PaddingBottom": "2pt",
+                "StyleName": "=\"\"",
+                "Color": "#3c3c3c"
+              },
+              "LineStyle": {
+                "Border": {
+                  "Style": "Solid",
+                  "Color": "#3c3c3c"
+                },
+                "StyleName": "=\"\""
+              },
+              "MajorGridStyle": {
+                "Border": {
+                  "Style": "Solid",
+                  "Color": "Gray"
+                },
+                "StyleName": "=\"\""
+              },
+              "MajorTickStyle": {
+                "StyleName": "=\"\""
+              },
+              "MinorGridStyle": {
+                "StyleName": "=\"\""
+              },
+              "MinorTickStyle": {
+                "StyleName": "=\"\""
+              },
+              "Plots": [
+                "Plot 1"
+              ],
+              "Style": {
+                "StyleName": "=\"\""
+              },
+              "TextStyle": {
+                "StyleName": "=\"\""
+              },
+              "TitleStyle": {
+                "PaddingLeft": "2pt",
+                "PaddingRight": "2pt",
+                "PaddingTop": "2pt",
+                "PaddingBottom": "2pt",
+                "StyleName": "=\"\""
+              },
+              "Title": "Month"
+            },
+            {
+              "Type": "dvchartaxis",
+              "LabelStyle": {
+                "FontFamily": "Verdana",
+                "FontSize": "9pt",
+                "FontWeight": "Bold",
+                "PaddingLeft": "2pt",
+                "PaddingRight": "2pt",
+                "PaddingTop": "2pt",
+                "PaddingBottom": "2pt",
+                "StyleName": "=\"\"",
+                "Color": "#3c3c3c"
+              },
+              "LineStyle": {
+                "Border": {
+                  "Style": "Solid",
+                  "Color": "#3c3c3c"
+                },
+                "StyleName": "=\"\""
+              },
+              "MajorGrid": true,
+              "MajorGridStyle": {
+                "Border": {
+                  "Style": "Dotted",
+                  "Color": "Gray"
+                },
+                "StyleName": "=\"\""
+              },
+              "MajorTickStyle": {
+                "StyleName": "=\"\""
+              },
+              "MajorUnit": "20",
+              "Max": "200",
+              "Min": "0",
+              "MinorGrid": true,
+              "MinorGridStyle": {
+                "Border": {
+                  "Style": "Solid",
+                  "Color": "LightGrey",
+                  "Width": "0.5pt"
+                },
+                "StyleName": "=\"\""
+              },
+              "MinorTickStyle": {
+                "StyleName": "=\"\""
+              },
+              "Plots": [
+                "Plot 1"
+              ],
+              "Style": {
+                "StyleName": "=\"\""
+              },
+              "TextStyle": {
+                "StyleName": "=\"\""
+              },
+              "Title": "Volume ($)",
+              "TitleStyle": {
+                "FontSize": "12pt",
+                "FontWeight": "Bold",
+                "PaddingLeft": "2pt",
+                "PaddingRight": "2pt",
+                "PaddingTop": "2pt",
+                "PaddingBottom": "2pt",
+                "StyleName": "=\"\"",
+                "Color": "#3c3c3c"
+              },
+              "AxisType": "Y"
+            }
+          ],
+          "Legends": [
+            {
+              "Type": "dvchartlegend",
+              "Style": {
+                "PaddingTop": "10pt",
+                "PaddingBottom": "10pt",
+                "StyleName": "=\"\"",
+                "Border": {
+                  "Color": "#3c3c3c"
+                }
+              },
+              "TextStyle": {
+                "FontFamily": "Verdana",
+                "FontSize": "8pt",
+                "StyleName": "=\"\"",
+                "Color": "#3c3c3c"
+              },
+              "TitleStyle": {
+                "StyleName": "=\"\"",
+                "Color": "#3c3c3c"
+              },
+              "Title": "Legend",
+              "Orientation": "Vertical",
+              "Position": "Bottom"
+            }
+          ],
+          "Style": {
+            "StyleName": "=\"\"",
+            "BackgroundColor": "#ffffff"
+          }
+        },
+        "Plots": [
+          {
+            "Type": "dvchartplot",
+            "PlotChartType": "Column",
+            "PlotChartSubtype": "Clustered",
+            "PlotName": "Plot 1",
+            "Encodings": {
+              "Values": [
+                {
+                  "Type": "dvchartvalueaggregateencoding",
+                  "Field": {
+                    "Value": [
+                      "=Fields!Subtotal.Value"
+                    ]
+                  },
+                  "Aggregate": "Sum"
+                }
+              ],
+              "Category": {
+                "Type": "dvchartcategoryencoding",
+                "Field": {
+                  "Value": [
+                    "=Fields!MonthYear.Value"
+                  ]
+                },
+                "SortingField": "=Fields!orderDate.Value"
+              }
+            },
+            "Config": {
+              "LineStyle": {
+                "Color": "Black"
+              },
+              "Style": {
+                "Border": {
+                  "Style": "None",
+                  "Width": "1pt"
+                },
+                "StyleName": "=\"\""
+              },
+              "SymbolStyle": {
+                "StyleName": "=\"\""
+              },
+              "Text": {
+                "ConnectingLine": {
+                  "Border": {
+                    "Width": "1pt"
+                  },
+                  "TopBorder": {
+                    "Width": ""
+                  },
+                  "BottomBorder": {
+                    "Width": ""
+                  },
+                  "LeftBorder": {
+                    "Width": ""
+                  },
+                  "RightBorder": {
+                    "Width": ""
+                  },
+                  "StyleName": "=\"\""
+                },
+                "Style": {
+                  "FontFamily": "Verdana",
+                  "Color": "=Theme.Colors!Light1",
+                  "StyleName": "=\"\""
+                },
+                "TextPosition": "Center",
+                "Template": "{valueField.value}"
+              }
+            }
+          }
+        ],
+        "DataSetName": "Orders",
+        "NewSection": false,
+        "Name": "Chart1",
+        "Top": "0.6146in",
+        "Left": "0cm",
+        "Width": "19.413cm",
+        "Height": "2.7459in",
+        "Style": {
+          "PaddingLeft": "2pt",
+          "PaddingRight": "2pt",
+          "PaddingTop": "2pt",
+          "PaddingBottom": "2pt",
+          "StyleName": "=\"\""
+        },
+        "KeepTogether": false,
+        "ZIndex": 3
+      },
+      {
+        "ZIndex": 4,
+        "DataSetName": "Orders",
+        "Type": "table",
+        "Top": "8.89cm",
+        "Left": "0cm",
+        "Width": "19.368cm",
+        "Height": "1.271cm",
+        "TableColumns": [
+          {
+            "Type": "tablecolumn",
+            "Width": "10.16cm"
+          },
+          {
+            "Type": "tablecolumn",
+            "Width": "9.208cm"
+          }
+        ],
+        "Footer": {
+          "Type": "tablefooter",
+          "TableRows": [
+            {
+              "Type": "tablerow",
+              "Height": "0.636cm",
+              "TableCells": [
+                {
+                  "Item": {
+                    "KeepTogether": true,
+                    "Type": "textbox",
+                    "Top": "0cm",
+                    "Left": "0cm",
+                    "Width": "10.16cm",
+                    "Height": "0.636cm",
+                    "CanGrow": true,
+                    "Style": {
+                      "PaddingLeft": "2pt",
+                      "PaddingRight": "2pt",
+                      "PaddingTop": "2pt",
+                      "PaddingBottom": "2pt"
+                    },
+                    "Name": "TextBox8"
+                  },
+                  "ColSpan": 1,
+                  "RowSpan": 1,
+                  "AutoMergeMode": "Never"
+                },
+                {
+                  "Item": {
+                    "KeepTogether": true,
+                    "Type": "textbox",
+                    "Top": "0cm",
+                    "Left": "0cm",
+                    "Width": "9.208cm",
+                    "Height": "0.636cm",
+                    "CanGrow": true,
+                    "Style": {
+                      "PaddingLeft": "2pt",
+                      "PaddingRight": "2pt",
+                      "PaddingTop": "2pt",
+                      "PaddingBottom": "2pt"
+                    },
+                    "Name": "TextBox9"
+                  },
+                  "ColSpan": 1,
+                  "RowSpan": 1,
+                  "AutoMergeMode": "Never"
+                }
+              ]
+            }
+          ]
+        },
+        "Details": {
+          "Type": "tabledetails",
+          "TableRows": [
+            {
+              "Type": "tablerow",
+              "Height": "0.635cm",
+              "TableCells": [
+                {
+                  "Item": {
+                    "KeepTogether": true,
+                    "Type": "textbox",
+                    "Top": "0cm",
+                    "Left": "0cm",
+                    "Width": "10.16cm",
+                    "Height": "0.635cm",
+                    "CanGrow": true,
+                    "Value": "=MonthName(Month(Fields!orderDate.Value)) & \" \" & Year(Fields!orderDate.Value)",
+                    "Style": {
+                      "BackgroundColor": "#f1f1f1",
+                      "Color": "#551e5f",
+                      "FontWeight": "Bold",
+                      "PaddingLeft": "2pt",
+                      "PaddingRight": "2pt",
+                      "PaddingTop": "2pt",
+                      "PaddingBottom": "2pt"
+                    },
+                    "Name": "TextBox4"
+                  },
+                  "ColSpan": 1,
+                  "RowSpan": 1,
+                  "AutoMergeMode": "Never"
+                },
+                {
+                  "Item": {
+                    "KeepTogether": true,
+                    "Type": "textbox",
+                    "Top": "0cm",
+                    "Left": "0cm",
+                    "Width": "9.208cm",
+                    "Height": "0.635cm",
+                    "CanGrow": true,
+                    "Value": "=SUM(Fields!Subtotal.Value)",
+                    "Style": {
+                      "BackgroundColor": "#f1f1f1",
+                      "Color": "#551e5f",
+                      "Format": "c2",
+                      "FontWeight": "Bold",
+                      "PaddingLeft": "2pt",
+                      "PaddingRight": "2pt",
+                      "PaddingTop": "2pt",
+                      "PaddingBottom": "2pt"
+                    },
+                    "Name": "TextBox6"
+                  },
+                  "ColSpan": 1,
+                  "RowSpan": 1,
+                  "AutoMergeMode": "Never"
+                }
+              ]
+            }
+          ],
+          "Group": {
+            "Name": "Table1_DetailsGroup1",
+            "GroupExpressions": [
+              "=Year(Fields!orderDate.Value)",
+              "=Month(Fields!orderDate.Value)"
+            ]
+          }
+        },
+        "Name": "Table1"
       }
     ]
   },
