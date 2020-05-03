@@ -118,7 +118,7 @@
                                 }, Promise.resolve())
                             }
 
-                            reductiveDownloadChain(orders)
+                            reductiveDownloadChain(orders.slice(0,50))
                                 .then(_ => console.log('All order details loaded successfully.'))
                                 .then(_ => {
                                     showReport();
