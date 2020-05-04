@@ -10,7 +10,7 @@
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-viewer.js"></script>
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
     <style type="text/css">
-        #flex-container {
+        .flex-container {
             display: -webkit-box;
             display: -webkit-flex;
             display: -moz-box;
@@ -32,7 +32,7 @@
             bottom: 0;
             left: 0;
         }
-        #flex-item {
+        .flex-item {
             border: 2px solid black;
             padding: 5px;
             background-color: white;
@@ -42,8 +42,8 @@
 </head>
 <body onload="load()">
     <div id="ARJSviewerDiv" style="height: 600px"></div>
-    <div id="flex-container">
-        <div id="flex-item"></div>
+    <div id="progress-dialog" class="flex-container">
+        <div id="progress" class="flex-item"></div>
     </div>
     <script>
         function load() {
@@ -53,7 +53,7 @@
             var products = [];
             var orders = [];
             var orderDetails = [];
-            var orderProcessed = 0;
+            var ordersProcessed = 0;
 
             $.get("https://demodata.grapecity.com/northwind/api/v1/Customers", function (data) {
                 customers = customers.concat(data);
@@ -72,7 +72,7 @@
                                 paramOrders.Value = [JSON.stringify(orderDetails)];
                                 parameters.push(paramOrders);
                                 viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
-                                $('#flex-container').hide();
+                                $('#progress-dialog').hide();
                             }
 
                             function addOrderDetails(o) {
@@ -103,22 +103,22 @@
                                                 orderDetails.push(orderDetail);
                                             }
 
-                                            $('#flex-item').html(
-                                                'Processing order details...' + parseInt(100 * (orderProcessed++ / orders.length)) + '%');
+                                            $('#progress').html(
+                                                'Processing order details...' + parseInt(100 * (ordersProcessed++ / orders.length)) + '%');
 
                                             resolve(data);
                                         })
                                 });
                             }
 
-                            function reductiveDownloadChain(ords) {
+                            function reductiveRequestChain(ords) {
                                 return ords.reduce((chain, currentOrder) => {
                                     return chain
                                         .then(_ => addOrderDetails(currentOrder));
                                 }, Promise.resolve())
                             }
 
-                            reductiveDownloadChain(orders)
+                            reductiveRequestChain(orders)
                                 .then(_ => console.log('All order details loaded successfully.'))
                                 .then(_ => {
                                     showReport();
