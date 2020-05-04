@@ -9,22 +9,10 @@
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-core.js"></script>
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-viewer.js"></script>
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-    <style type="text/css">
+    <style>
         .flex-container {
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -moz-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-align: center;
-            -webkit-align-items: center;
-            -moz-box-align: center;
-            -ms-flex-align: center;
             align-items: center;
-            -webkit-box-pack: center;
-            -webkit-justify-content: center;
-            -moz-box-pack: center;
-            -ms-flex-pack: center;
             justify-content: center;
             position: fixed;
             top: 0;
@@ -43,7 +31,7 @@
 <body onload="load()">
     <div id="ARJSviewerDiv" style="height: 600px"></div>
     <div id="progress-dialog" class="flex-container">
-        <div id="progress" class="flex-item"></div>
+        <div id="progress" class="flex-item">Processing order details...</div>
     </div>
     <script>
         function load() {
@@ -59,73 +47,73 @@
                 customers = customers.concat(data);
                 parameters.push({ Name: 'Customers', Value: [JSON.stringify(customers)] });
             })
-                .done(function () {
-                    $.get("https://demodata.grapecity.com/northwind/api/v1/Products", function (data) {
-                        products = products.concat(data);
-                        parameters.push({ Name: 'Products', Value: [JSON.stringify(products)] });
-                    }).done(function () {
-                        $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
-                            orders = orders.concat(data);
+            .done(function () {
+                $.get("https://demodata.grapecity.com/northwind/api/v1/Products", function (data) {
+                    products = products.concat(data);
+                    parameters.push({ Name: 'Products', Value: [JSON.stringify(products)] });
+                }).done(function () {
+                    $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
+                        orders = orders.concat(data);
 
-                            function showReport() {
-                                var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
-                                paramOrders.Value = [JSON.stringify(orderDetails)];
-                                parameters.push(paramOrders);
-                                viewer.open('drill-down.rdlx-json', { ReportParams: parameters });
-                                $('#progress-dialog').hide();
-                            }
-
-                            function addOrderDetails(o) {
-                                return new Promise((resolve, reject) => {
-                                    $.ajax({
-                                        url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + o.orderId + "/OrderDetails"
-                                    })
-                                        .done(function (data) {
-                                            for (var j = 0; j < data.length; j++) {
-                                                var orderDetail = data[j];
-
-                                                const order = orders.find(element => element.orderId == orderDetail.orderId);
-                                                orderDetail.orderId = order.orderId;
-                                                orderDetail.customerId = order.customerId;
-                                                orderDetail.employeeId = order.employeeId;
-                                                orderDetail.orderDate = order.orderDate;
-                                                orderDetail.requiredDate = order.requiredDate;
-                                                orderDetail.shippedDate = order.shippedDate;
-                                                orderDetail.shipVia = order.shipVia;
-                                                orderDetail.freight = order.freight;
-                                                orderDetail.shipName = order.shipName;
-                                                orderDetail.shipAddress = order.shipAddress;
-                                                orderDetail.shipCity = order.shipCity;
-                                                orderDetail.shipRegion = order.shipRegion;
-                                                orderDetail.shipPostalCode = order.shipPostalCode;
-                                                orderDetail.shipCountry = order.shipCountry;
-
-                                                orderDetails.push(orderDetail);
-                                            }
-
-                                            $('#progress').html(
-                                                'Processing order details...' + parseInt(100 * (ordersProcessed++ / orders.length)) + '%');
-
-                                            resolve(data);
-                                        })
-                                });
-                            }
-
-                            function reductiveRequestChain(ords) {
-                                return ords.reduce((chain, currentOrder) => {
-                                    return chain
-                                        .then(_ => addOrderDetails(currentOrder));
-                                }, Promise.resolve())
-                            }
-
-                            reductiveRequestChain(orders)
-                                .then(_ => console.log('All order details loaded successfully.'))
-                                .then(_ => {
-                                    showReport();
-                                })
-                        })
-                    });
+                        reductiveRequestChain(orders)
+                            .then(_ => console.log('All order details loaded successfully.'))
+                            .then(_ => {
+                                showReport();
+                            })
+                    })
                 });
+            });
+
+            function showReport() {
+                var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
+                paramOrders.Value = [JSON.stringify(orderDetails)];
+                parameters.push(paramOrders);
+                viewer.open('EXAMPLE.rdlx-json', { ReportParams: parameters });
+                $('#progress-dialog').hide();
+            }
+
+            function addOrderDetails(o) {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + o.orderId + "/OrderDetails"
+                    })
+                        .done(function (data) {
+                            for (var j = 0; j < data.length; j++) {
+                                var orderDetail = data[j];
+
+                                const order = orders.find(element => element.orderId == orderDetail.orderId);
+                                orderDetail.orderId = order.orderId;
+                                orderDetail.customerId = order.customerId;
+                                orderDetail.employeeId = order.employeeId;
+                                orderDetail.orderDate = order.orderDate;
+                                orderDetail.requiredDate = order.requiredDate;
+                                orderDetail.shippedDate = order.shippedDate;
+                                orderDetail.shipVia = order.shipVia;
+                                orderDetail.freight = order.freight;
+                                orderDetail.shipName = order.shipName;
+                                orderDetail.shipAddress = order.shipAddress;
+                                orderDetail.shipCity = order.shipCity;
+                                orderDetail.shipRegion = order.shipRegion;
+                                orderDetail.shipPostalCode = order.shipPostalCode;
+                                orderDetail.shipCountry = order.shipCountry;
+
+                                orderDetails.push(orderDetail);
+                            }
+
+                            $('#progress').html(
+                                'Processing order details...' + parseInt(100 * (ordersProcessed++ / orders.length)) + '%');
+
+                            resolve(data);
+                        })
+                });
+            }
+
+            function reductiveRequestChain(ords) {
+                return ords.reduce((chain, currentOrder) => {
+                    return chain
+                        .then(_ => addOrderDetails(currentOrder));
+                }, Promise.resolve())
+            }
         }
     </script>
 </body>
