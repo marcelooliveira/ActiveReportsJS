@@ -43,26 +43,15 @@
             var orderDetails = [];
             var ordersProcessed = 0;
 
-            $.get("https://demodata.grapecity.com/northwind/api/v1/Customers", function (data) {
-                customers = customers.concat(data);
-                parameters.push({ Name: 'Customers', Value: [JSON.stringify(customers)] });
-            })
-            .done(function () {
-                $.get("https://demodata.grapecity.com/northwind/api/v1/Products", function (data) {
-                    products = products.concat(data);
-                    parameters.push({ Name: 'Products', Value: [JSON.stringify(products)] });
-                }).done(function () {
-                    $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
-                        orders = orders.concat(data);
+            $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
+                orders = orders.concat(data);
 
-                        reductiveRequestChain(orders)
-                            .then(_ => console.log('All order details loaded successfully.'))
-                            .then(_ => {
-                                showReport();
-                            })
+                reductiveRequestChain(orders)
+                    .then(_ => console.log('All order details loaded successfully.'))
+                    .then(_ => {
+                        showReport();
                     })
-                });
-            });
+            })
 
             function showReport() {
                 var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
