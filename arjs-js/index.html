@@ -8,101 +8,13 @@
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ie-polyfills.js"></script> <!--to run in IE-->
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-core.js"></script>
     <script type="text/javascript" src="node_modules/@grapecity/activereports/dist/ar-js-viewer.js"></script>
-    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
-    <style>
-        .flex-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-        }
-        .flex-item {
-            border: 2px solid black;
-            padding: 5px;
-            background-color: white;
-            font: 30px helvetica;
-        }
-    </style>
 </head>
 <body onload="load()">
     <div id="ARJSviewerDiv" style="height: 600px"></div>
-    <div id="progress-dialog" class="flex-container">
-        <div id="progress" class="flex-item">Processing order details...</div>
-    </div>
     <script>
         function load() {
             const viewer = new ActiveReports.Viewer('#ARJSviewerDiv');
-            var parameters = [];
-            var customers = [];
-            var products = [];
-            var orders = [];
-            var orderDetails = [];
-            var ordersProcessed = 0;
-
-            $.get("https://demodata.grapecity.com/northwind/api/Orders", function (data) {
-                orders = orders.concat(data);
-
-                reductiveRequestChain(orders)
-                    .then(_ => console.log('All order details loaded successfully.'))
-                    .then(_ => {
-                        showReport();
-                    })
-            })
-
-            function showReport() {
-                var paramOrders = { Name: 'Orders', Value: ["[{}]"] };
-                paramOrders.Value = [JSON.stringify(orderDetails)];
-                parameters.push(paramOrders);
-                viewer.open('EXAMPLE.rdlx-json', { ReportParams: parameters });
-                $('#progress-dialog').hide();
-            }
-
-            function addOrderDetails(o) {
-                return new Promise((resolve, reject) => {
-                    $.ajax({
-                        url: "https://demodata.grapecity.com/northwind/api/v1/Orders/" + o.orderId + "/OrderDetails"
-                    })
-                        .done(function (data) {
-                            for (var j = 0; j < data.length; j++) {
-                                var orderDetail = data[j];
-
-                                const order = orders.find(element => element.orderId == orderDetail.orderId);
-                                orderDetail.orderId = order.orderId;
-                                orderDetail.customerId = order.customerId;
-                                orderDetail.employeeId = order.employeeId;
-                                orderDetail.orderDate = order.orderDate;
-                                orderDetail.requiredDate = order.requiredDate;
-                                orderDetail.shippedDate = order.shippedDate;
-                                orderDetail.shipVia = order.shipVia;
-                                orderDetail.freight = order.freight;
-                                orderDetail.shipName = order.shipName;
-                                orderDetail.shipAddress = order.shipAddress;
-                                orderDetail.shipCity = order.shipCity;
-                                orderDetail.shipRegion = order.shipRegion;
-                                orderDetail.shipPostalCode = order.shipPostalCode;
-                                orderDetail.shipCountry = order.shipCountry;
-
-                                orderDetails.push(orderDetail);
-                            }
-
-                            $('#progress').html(
-                                'Processing order details...' + parseInt(100 * (ordersProcessed++ / orders.length)) + '%');
-
-                            resolve(data);
-                        })
-                });
-            }
-
-            function reductiveRequestChain(ords) {
-                return ords.reduce((chain, currentOrder) => {
-                    return chain
-                        .then(_ => addOrderDetails(currentOrder));
-                }, Promise.resolve())
-            }
+            viewer.open('MonthlyOrders.rdlx-json');
         }
     </script>
 </body>
